@@ -1,0 +1,6 @@
+[submodule "docker_f2b"]
+	path = docker_f2b
+	url = git@github.com:BenJ1337/docker_f2b.git
+[submodule "docker_nginx"]
+	path = docker_nginx
+	url = git@github.com:BenJ1337/docker_nginx.git

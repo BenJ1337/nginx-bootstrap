@@ -1,0 +1,3 @@
+include:
+- docker_nginx/docker-compose.yml
+- docker_f2b/docker-compose.yml
