@@ -38,12 +38,12 @@ certonly --verbose --keep-until-expiring --agree-tos --email <your-email> --pref
 
 ## Utility / Cheatsheet
 ```
-docker exec -it f2b fail2ban-client set nginx-ha unbanip <ip-address>
+docker exec -it f2b fail2ban-client set <jail> unbanip <ip-address>
 docker exec nginx nginx -s reload
 
 docker run -it --rm -v nginx_html:/nginx-html -v ./html:/new-html/ busybox cp -a /new-html/. /nginx-html/
-docker run -it --rm -v f2b:/f2b -e TZ=Europe/Berlin busybox cat /f2b/banlist.txt
+docker run -it --rm -v f2b:/f2b  busybox cat /f2b/banlist.txt
 
-docker run -it --rm -v nginx_logs:/logs -e TZ=Europe/Berlin busybox ls -lh /logs/
-docker run -it --rm -v nginx_logs:/logs -e TZ=Europe/Berlin busybox truncate -s 0 /logs/*.log
+docker run -it --rm -v nginx_logs:/logs  busybox ls -lh /logs/
+docker run -it --rm -v nginx_logs:/logs  busybox truncate -s 0 /logs/*.log
 ```
