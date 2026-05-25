@@ -1,12 +1,8 @@
-
 ## Initial Stepps
-first create volumes
-```
-$ echo nginx_certs nginx_logs f2b | xargs -n 1 docker volume create
-```
-
-then create a network
-```
+```sh
+$ git submodule update --init --recursive
+# chmod 775 docker_nginx/nginx-html/
+# chmod 774 -R docker_nginx/nginx-html/*
 $ docker network create --subnet=172.16.111.0/24 certbot-network
 ```
 
@@ -17,7 +13,7 @@ $ docker network create --subnet=172.16.111.0/24 certbot-network
 ```
 docker run -it --rm \
 -p 80:80 \
--v "nginx_certs:/etc/letsencrypt" \
+-v "./docker_nginx/nginx_certs/:/etc/letsencrypt" \
 --name cb \
 "certbot/certbot" \
 certonly --verbose --keep-until-expiring --agree-tos --email <your-email> --preferred-challenges http --standalone -d "<domain1>" -d "<domain2>"
@@ -33,6 +29,14 @@ docker run -it --rm \
 --name cb \
 "certbot/certbot" \
 certonly --verbose --keep-until-expiring --agree-tos --email <your-email> --preferred-challenges http --standalone -d "<domain1>" -d "<domain2>"
+
+docker run -it --rm \
+--network certbot-network \
+--ip 172.16.111.10 \
+-v "./docker_nginx/nginx_certs/:/etc/letsencrypt" \
+--name cb \
+"certbot/certbot" \
+certonly --verbose --keep-until-expiring --agree-tos --email "<your-email>" --preferred-challenges http --standalone -d "<domain>"
 ```
 
 
